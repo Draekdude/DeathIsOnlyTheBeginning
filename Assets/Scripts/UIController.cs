@@ -9,7 +9,9 @@ using UnityEngine.InputSystem;
 public class UIController : MonoBehaviour
 {
     [SerializeField] private GameObject pauseScreen;
-    [SerializeField] private GameObject deadScreen;
+    [SerializeField] private GameObject endScreen;
+    [SerializeField] private TextMeshProUGUI endText;
+    [SerializeField] private TextMeshProUGUI scoreText;
     bool _isPaused = false;
     GameController _gameController;
     // Start is called before the first frame update
@@ -21,12 +23,19 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        scoreText.text = _gameController.GetTime();
     }
 
+    public void PlayerWon()
+    {
+        endText.text = "YOU WON!!!";
+        endScreen.SetActive(true);
+    }
+    
     public void PlayerDied()
     {
-        deadScreen.SetActive(true);
+        endText.text = "YOU DIED!!!";
+        endScreen.SetActive(true);
     }
 
     public void StartOver()
